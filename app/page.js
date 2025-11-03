@@ -1,65 +1,144 @@
+"use client";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import Confetti from "./confetti";
 
 export default function Home() {
+  const [candleBlown, setCandleBlown] = useState(false);
+  const [confettiLoop, setConfettiLoop] = useState(false);
+  const [confettiCount, setConfettiCount] = useState(0);
+
+  const blowCandle = () => {
+    setCandleBlown(true);
+    setConfettiLoop(true);
+    setConfettiCount(0);
+  };
+
+  useEffect(() => {
+    if (confettiLoop && confettiCount < 3) {
+      const interval = setInterval(() => {
+        setConfettiCount((prev) => prev + 1);
+        if (confettiCount >= 2) {
+          setConfettiLoop(false);
+        }
+      }, 5200);
+
+      return () => clearInterval(interval);
+    }
+  }, [confettiLoop, confettiCount]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-[#0a0a0a] via-[#1a0f00] to-black text-[#ffb347] font-[Comic_Sans_MS] tracking-wide">
+      <main className="flex w-full">
+        {/* Left Half */}
+        <div className="w-1/2 flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 800 500"
+            width="800"
+            height="500"
+            aria-hidden="true"
+          >
+            <defs>
+              <path id="curve" d="M100,180 A300,150 0 0,1 700,180" />
+
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#FFD966" />
+                <stop offset="50%" stopColor="#FFC300" />
+                <stop offset="100%" stopColor="#FF9900" />
+              </linearGradient>
+            </defs>
+
+            <rect width="100%" height="100%" fill="none" />
+
+            <text
+              fontFamily="Fredoka One, cursive"
+              fontSize="52"
+              textAnchor="middle"
+              filter="url(#glow)"
+              fill="url(#grad)"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <textPath href="#curve" startOffset="50%">
+                Congrats my friend :)
+              </textPath>
+            </text>
+
+            <text
+              x="250"
+              y="200"
+              fontFamily="Fredoka One, cursive"
+              fontSize="34"
+              filter="url(#glow)"
+              fill="url(#grad)"
+              transform="rotate(-5, 250, 200)"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              Click the Balloon :)
+            </text>
+
+            <text
+              x="300"
+              y="300"
+              fontFamily="Fredoka One, cursive"
+              fontSize="32"
+              filter="url(#glow)"
+              fill="url(#grad)"
+              transform="rotate(5, 300, 300)"
+            >
+              You are working hard!
+            </text>
+
+            <text
+              x="200"
+              y="380"
+              fontFamily="Fredoka One, cursive"
+              fontSize="32"
+              filter="url(#glow)"
+              fill="url(#grad)"
+              transform="rotate(-5, 300, 300)"
+            >
+              You deserve it!
+            </text>
+
+            <text
+              x="440"
+              y="500"
+              fontFamily="Fredoka One, cursive"
+              fontSize="22"
+              fill="#FF9966"
+              filter="url(#glow)"
+              transform="rotate(-3, 350, 400)"
+            >
+              (Your supporter appreciates you)
+            </text>
+          </svg>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Right Half */}
+        <div
+          className="w-1/2 flex items-center justify-center"
+          onClick={blowCandle}
+        >
+          <div className="relative">
+            <div className="w-64 h-64 flex items-center justify-center">
+              <img src="/pusheen-flying.gif"/>
+            </div>
+            {!candleBlown && (
+              <div
+                className="absolute top-4 left-1/2 transform -translate-x-1/2 w-6 h-12 rounded-sm animate-flicker"
+              ></div>
+            )}
+          </div>
         </div>
       </main>
+      {confettiLoop && <Confetti pieces={30} duration={5200} />}
     </div>
   );
 }
