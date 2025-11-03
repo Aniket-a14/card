@@ -30,7 +30,6 @@ export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-[#0a0a0a] via-[#1a0f00] to-black text-[#ffb347] font-[Comic_Sans_MS] tracking-wide px-4">
       <main className="flex flex-col md:flex-row w-full md:items-stretch items-center justify-center gap-6 md:gap-0">
-        {/* Left Half */}
         <div className="w-full md:w-1/2 flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +121,6 @@ export default function Home() {
           </svg>
         </div>
 
-        {/* Right Half */}
         <div
           className="w-full md:w-1/2 flex items-center justify-center cursor-pointer"
           onClick={blowCandle}

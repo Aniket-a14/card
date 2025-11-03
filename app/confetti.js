@@ -14,7 +14,7 @@ export default function Confetti({ pieces = 30, duration = 8000, onDone }) {
       {Array.from({ length: pieces }).map((_, i) => {
         const left = Math.round(Math.random() * 100);
         const delay = Math.random() * 2;
-        const dur = 3 + Math.random() * 3; // 3–6s
+        const dur = 3 + Math.random() * 3; 
         const color = colors[i % colors.length];
         const size = 6 + Math.round(Math.random() * 10);
 
