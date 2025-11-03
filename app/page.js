@@ -28,15 +28,16 @@ export default function Home() {
   }, [confettiLoop, confettiCount]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-[#0a0a0a] via-[#1a0f00] to-black text-[#ffb347] font-[Comic_Sans_MS] tracking-wide">
-      <main className="flex w-full">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-[#0a0a0a] via-[#1a0f00] to-black text-[#ffb347] font-[Comic_Sans_MS] tracking-wide px-4">
+      <main className="flex flex-col md:flex-row w-full md:items-stretch items-center justify-center gap-6 md:gap-0">
         {/* Left Half */}
-        <div className="w-1/2 flex items-center justify-center">
+        <div className="w-full md:w-1/2 flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 800 500"
             width="800"
             height="500"
+            className="max-w-full h-auto"
             aria-hidden="true"
           >
             <defs>
@@ -123,21 +124,24 @@ export default function Home() {
 
         {/* Right Half */}
         <div
-          className="w-1/2 flex items-center justify-center"
+          className="w-full md:w-1/2 flex items-center justify-center cursor-pointer"
           onClick={blowCandle}
         >
           <div className="relative">
-            <div className="w-64 h-64 flex items-center justify-center">
-              <img src="/pusheen-flying.gif"/>
+            <div className="w-52 h-52 sm:w-64 sm:h-64 flex items-center justify-center">
+              <img
+                src="/pusheen-flying.gif"
+                alt="Flying Balloon"
+                className="w-full h-full object-contain"
+              />
             </div>
             {!candleBlown && (
-              <div
-                className="absolute top-4 left-1/2 transform -translate-x-1/2 w-6 h-12 rounded-sm animate-flicker"
-              ></div>
+              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-6 h-12 rounded-sm animate-flicker"></div>
             )}
           </div>
         </div>
       </main>
+
       {confettiLoop && <Confetti pieces={30} duration={5200} />}
     </div>
   );
